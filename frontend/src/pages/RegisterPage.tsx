@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { User, Mail, Lock, UserPlus, ArrowLeft, ShieldCheck, Briefcase } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { AxiosError } from 'axios';
+import { useAuth } from '../context/useAuth';
 import Button from '../components/ui/Button';
 
 const RegisterPage: React.FC = () => {
@@ -24,8 +25,9 @@ const RegisterPage: React.FC = () => {
     try {
       await register({ name, email, password, role });
       navigate('/dashboard');
-    } catch (err: any) {
-      setError(err.response?.data?.error || 'Registration failed. Please check your details.');
+    } catch (err: unknown) {
+      const axiosErr = err as AxiosError<{ error?: string }>;
+      setError(axiosErr.response?.data?.error || 'Registration failed. Please check your details.');
     } finally {
       setIsLoading(false);
     }

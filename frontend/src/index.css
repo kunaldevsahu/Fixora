@@ -16,6 +16,7 @@
   --ink-2: #4f6478;
   --line: rgba(217, 228, 238, 0.5);
   --surface: rgba(255, 255, 255, 0.7);
+  --surface-muted: rgba(255, 255, 255, 0.55);
   --accent: #0ea5e9;
   --accent-2: #f39a55;
   --shadow-soft: 0 16px 38px rgba(24, 36, 51, 0.05);

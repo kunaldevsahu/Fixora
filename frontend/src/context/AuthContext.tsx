@@ -1,16 +1,8 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import api from '../services/api';
 import type { IUser, AuthResponse } from '../types';
-
-interface AuthContextType {
-  user: IUser | null;
-  loading: boolean;
-  login: (data: any) => Promise<void>;
-  register: (data: any) => Promise<void>;
-  logout: () => void;
-}
-
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+import { AuthContext } from './auth-context';
+import type { LoginRequest, RegisterRequest } from './auth-context';
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<IUser | null>(null);
@@ -35,14 +27,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     initAuth();
   }, []);
 
-  const login = async (data: any) => {
+  const login = async (data: LoginRequest) => {
     const res = await api.post<AuthResponse>('/auth/login', data);
     const { token, user: userData } = res.data;
     localStorage.setItem('fixora_token', token);
     setUser(userData);
   };
 
-  const register = async (data: any) => {
+  const register = async (data: RegisterRequest) => {
     const res = await api.post<AuthResponse>('/auth/register', data);
     const { token, user: userData } = res.data;
     localStorage.setItem('fixora_token', token);
@@ -59,10 +51,4 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       {children}
     </AuthContext.Provider>
   );
-};
-
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) throw new Error('useAuth must be used within AuthProvider');
-  return context;
 };

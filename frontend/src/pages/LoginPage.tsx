@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Lock, LogIn, ArrowRight, AlertCircle } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { AxiosError } from 'axios';
+import { useAuth } from '../context/useAuth';
 import Button from '../components/ui/Button';
 
 const LoginPage: React.FC = () => {
@@ -22,8 +23,9 @@ const LoginPage: React.FC = () => {
     try {
       await login({ email, password });
       navigate('/dashboard');
-    } catch (err: any) {
-      setError(err.response?.data?.error || 'Invalid email or password. Please try again.');
+    } catch (err: unknown) {
+      const axiosErr = err as AxiosError<{ error?: string }>;
+      setError(axiosErr.response?.data?.error || 'Invalid email or password. Please try again.');
     } finally {
       setIsLoading(false);
     }

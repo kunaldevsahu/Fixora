@@ -7,12 +7,20 @@ export default {
   theme: {
     extend: {
       colors: {
+        ink: {
+          1: 'var(--ink-1)',
+          2: 'var(--ink-2)',
+        },
+        line: 'var(--line)',
         brand: {
           50: '#f0f9ff',
           100: '#e0f2fe',
+          200: '#bae6fd',
+          300: '#7dd3fc',
           500: '#0ea5e9',
           600: '#0284c7',
           700: '#0369a1',
+          800: '#075985',
         },
         accent: {
           teal: '#147f76',

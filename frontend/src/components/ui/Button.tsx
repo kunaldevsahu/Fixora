@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import type { HTMLMotionProps } from 'framer-motion';
 
-interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onDrag' | 'onDragStart' | 'onDragEnd' | 'onAnimationStart' | 'style' | 'ref'> {
+interface ButtonProps extends Omit<HTMLMotionProps<'button'>, 'color'> {
   variant?: 'primary' | 'secondary' | 'outline' | 'glass';
   size?: 'sm' | 'md' | 'lg';
   children: React.ReactNode;
@@ -34,7 +35,7 @@ const Button: React.FC<ButtonProps> = ({
       whileHover={{ y: -2 }}
       whileTap={{ scale: 0.98 }}
       className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
-      {...props as any}
+      {...props}
     >
       {children}
     </motion.button>

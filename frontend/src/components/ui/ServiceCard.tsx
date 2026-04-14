@@ -49,7 +49,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ service }) => {
           </div>
         </div>
 
-        <div className="flex items-center justify-between gap-3 pt-3 border-top border-line">
+        <div className="flex items-center justify-between gap-3 pt-3 border-t border-line">
           <Link to={`/service/${service._id}`} className="flex-1">
             <Button variant="primary" size="md" className="w-full text-sm">
               View Details

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Twitter, Instagram, Github, Mail } from 'lucide-react';
+import { Instagram, Mail, Facebook, Linkedin, X } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
@@ -15,9 +15,18 @@ const Footer: React.FC = () => {
             Connecting you with the best local service professionals in your area. Quick, reliable, and premium service every time.
           </p>
           <div className="flex gap-4">
-            <a href="#" className="p-2 bg-surface-muted rounded-lg text-ink-2 hover:text-brand-500 transition-colors"><Twitter size={18} /></a>
-            <a href="#" className="p-2 bg-surface-muted rounded-lg text-ink-2 hover:text-brand-500 transition-colors"><Instagram size={18} /></a>
-            <a href="#" className="p-2 bg-surface-muted rounded-lg text-ink-2 hover:text-brand-500 transition-colors"><Github size={18} /></a>
+            <a href="#" className="p-2 bg-surface-muted rounded-lg text-ink-2 hover:text-brand-500 transition-colors" aria-label="Instagram">
+              <Instagram size={18} />
+            </a>
+            <a href="#" className="p-2 bg-surface-muted rounded-lg text-ink-2 hover:text-brand-500 transition-colors" aria-label="Facebook">
+              <Facebook size={18} />
+            </a>
+            <a href="#" className="p-2 bg-surface-muted rounded-lg text-ink-2 hover:text-brand-500 transition-colors" aria-label="X">
+              <X size={18} />
+            </a>
+            <a href="#" className="p-2 bg-surface-muted rounded-lg text-ink-2 hover:text-brand-500 transition-colors" aria-label="LinkedIn">
+              <Linkedin size={18} />
+            </a>
           </div>
         </div>
 

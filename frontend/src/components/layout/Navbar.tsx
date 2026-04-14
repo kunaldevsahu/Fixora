@@ -1,10 +1,10 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Search, User, ShoppingBag } from 'lucide-react';
+import { Search, User } from 'lucide-react';
 import Button from '../ui/Button';
 
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../context/useAuth';
 
 const Navbar: React.FC = () => {
   const { user, logout } = useAuth();
@@ -39,10 +39,6 @@ const Navbar: React.FC = () => {
           <button className="p-2 text-ink-2 hover:text-brand-500 transition-colors">
             <Search size={20} />
           </button>
-          <Link to="/bookings" className="p-2 text-ink-2 hover:text-brand-500 transition-colors relative">
-            <ShoppingBag size={20} />
-            {user && <span className="absolute top-0 right-0 w-2 h-2 bg-accent-orange rounded-full"></span>}
-          </Link>
           <div className="h-6 w-[1px] bg-line mx-1"></div>
           
           {user ? (

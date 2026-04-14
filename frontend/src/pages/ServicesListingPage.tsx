@@ -82,9 +82,24 @@ const MOCK_SERVICES: IService[] = [
 
 const CATEGORIES = ['All', 'Cleaning', 'Electrical', 'Plumbing', 'Painting', 'Gardening', 'Repair'];
 
+const INDIAN_CITIES = [
+  'Delhi, Delhi',
+  'Bangalore, Karnataka',
+  'Mumbai, Maharashtra',
+  'Chennai, Tamil Nadu',
+  'Hyderabad, Telangana',
+  'Kolkata, West Bengal',
+  'Jaipur, Rajasthan',
+  'Ahmedabad, Gujarat',
+  'Surat, Gujarat',
+  'Pune, Maharashtra',
+  'Nagpur, Maharashtra',
+] as const;
+
 const ServicesListingPage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCity, setSelectedCity] = useState<(typeof INDIAN_CITIES)[number]>(INDIAN_CITIES[0]);
 
   const filteredServices = MOCK_SERVICES.filter(service => {
     const matchesCategory = selectedCategory === 'All' || service.category === selectedCategory;
@@ -105,22 +120,28 @@ const ServicesListingPage: React.FC = () => {
         <div className="flex flex-col lg:flex-row gap-6 mb-12">
           <div className="flex-1 glass-panel p-2 rounded-2xl flex items-center gap-3">
             <Search size={20} className="ml-3 text-ink-2" />
-            <input 
-              type="text" 
-              placeholder="Search for any service..." 
+            <input
+              type="text"
+              placeholder="Search for any service..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full py-3 bg-transparent focus:outline-none font-medium text-ink-1"
             />
           </div>
-          
+
           <div className="flex gap-3 overflow-x-auto pb-2 no-scrollbar">
             <div className="glass-panel p-2 rounded-2xl flex items-center gap-2">
               <MapPin size={18} className="ml-2 text-ink-2" />
-              <select className="bg-transparent focus:outline-none pr-4 font-bold text-ink-1 text-sm">
-                <option>New York, NY</option>
-                <option>Los Angeles, CA</option>
-                <option>Chicago, IL</option>
+              <select
+                className="bg-transparent focus:outline-none pr-4 font-bold text-ink-1 text-sm"
+                value={selectedCity}
+                onChange={(e) => setSelectedCity(e.target.value as (typeof INDIAN_CITIES)[number])}
+              >
+                {INDIAN_CITIES.map((city) => (
+                  <option key={city} value={city}>
+                    {city}
+                  </option>
+                ))}
               </select>
             </div>
             <Button variant="secondary" className="rounded-2xl shrink-0 flex items-center gap-2">
@@ -136,11 +157,10 @@ const ServicesListingPage: React.FC = () => {
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-6 py-3 rounded-xl font-bold transition-all whitespace-nowrap ${
-                selectedCategory === cat 
-                ? 'bg-brand-500 text-white shadow-lg shadow-brand-500/20' 
-                : 'bg-white border border-line text-ink-2 hover:bg-surface-muted'
-              }`}
+              className={`px-6 py-3 rounded-xl font-bold transition-all whitespace-nowrap ${selectedCategory === cat
+                  ? 'bg-brand-500 text-white shadow-lg shadow-brand-500/20'
+                  : 'bg-white border border-line text-ink-2 hover:bg-surface-muted'
+                }`}
             >
               {cat}
             </button>
